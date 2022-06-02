@@ -1,13 +1,10 @@
 package com.bridgelabz.AddressBook;
-
 import java.util.ArrayList;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class AddressBook implements AddressBookInterface{
+public class AddressBook  {
     Scanner s = new Scanner(System.in);
     ArrayList<Person> list = new ArrayList<Person>();
 
@@ -16,9 +13,26 @@ public class AddressBook implements AddressBookInterface{
         // list=AddressManager.listReturn();
         list = arrayRead;
         boolean status = true;
-        add();
+        do {
+            System.out.println("Choose Operation you want to do");
+            System.out
+                    .println("1. Add\t2. Edit\t3. delete\t6. Back");
+            switch (s.nextInt()) {
+                case 1:
+                    add();
+                    break;
+                case 2:
+                    edit();
+                    break;
+                case 3:
+                    delete();
+                    break;
+                case 4:
+                    status = false;
+                    break;
+            }
+        } while (status);
     }
-
 
     public void add() {
         Person person = new Person();
@@ -50,3 +64,60 @@ public class AddressBook implements AddressBookInterface{
         list.add(person);
 
     }
+
+    public void edit() {
+        System.out.println("Enter your First name:");
+        String fname = s.next();
+
+        Iterator<Person> iterator = list.listIterator();
+
+        while (iterator.hasNext()) {
+            Person person = iterator.next();
+
+            if (fname.equals(person.getFname())) {
+                Address address = person.getAddress();
+                System.out.println("Choose field you want to add:");
+                System.out
+                        .println("1.Last Name\t2.Phone Number\t3.City\t4.Zip\t5. State");
+                switch (s.nextInt()) {
+                    case 1:
+                        System.out.println("Re-Correct your lastname");
+                        person.setLname(s.next());
+                        break;
+                    case 2:
+                        System.out.println("Re-Correct your Phone Number");
+                        person.setPhonenumber(s.nextLong());
+                        break;
+                    case 3:
+                        System.out.println("Re-Correct your City");
+                        address.setCity(s.next());
+                        break;
+                    case 4:
+                        System.out.println("Re-Correct your Zip");
+                        address.setZip(s.nextLong());
+                        break;
+                    case 5:
+                        System.out.println("Re-Correct your State");
+                        address.setState(s.next());
+                        break;
+                }
+
+            }
+        }
+
+    }
+
+    public void delete() {
+        System.out.println("Enter your First name:");
+        String fname = s.next();
+
+        Iterator<Person> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            Person person = iterator.next();
+
+            if (fname.equals(person.getFname())) {
+                list.remove(person);
+            }
+        }
+    }
+}
