@@ -16,7 +16,7 @@ public class AddressBook  {
         do {
             System.out.println("Choose Operation you want to do");
             System.out
-                    .println("1. Add\t2. Edit\t3. delete\t6. Back");
+                    .println("1. Add\t2. Edit\t3. delete\t4. Back");
             switch (s.nextInt()) {
                 case 1:
                     add();
